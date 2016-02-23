@@ -29,8 +29,7 @@ namespace SlackTrivia.Controllers
                 game = GetClue();
                 var text = new 
                 {
-                    title = game.category.title,
-                    text = game.question
+                    text = String.Format("*{0}* - *${1}* - {2}", game.category.title, game.value, game.question)
                 };
 
                 return Content(HttpStatusCode.OK, text);
@@ -40,7 +39,7 @@ namespace SlackTrivia.Controllers
             {
                 var text = new 
                 {
-                    text = String.Format("The answer I was looking for was \"{0}\".", game.answer)
+                    text = String.Format("The answer I was looking for was *{0}*.", game.answer)
                 };
 
                 game = null;
@@ -49,7 +48,7 @@ namespace SlackTrivia.Controllers
             }
 
 
-            return Content(HttpStatusCode.OK, new {text = message.user_name + "'s request processed at " + DateTime.Now});
+            return Ok();
         }
 
         public Jeopardy.Clue GetClue()
