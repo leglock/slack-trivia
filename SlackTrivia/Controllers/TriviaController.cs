@@ -8,12 +8,13 @@ using System.Text.RegularExpressions;
 using System.Web.Http;
 using Newtonsoft.Json;
 using SlackTrivia.Models;
+using System.Configuration;
 
 namespace SlackTrivia.Controllers
 {
     public class TriviaController : ApiController
     {
-        static private string slack_token = "gzjGlKQMiZ7jDjeUUKhycJ5f";
+        static private string slack_token = ConfigurationManager.AppSettings["SlackToken"];
         static HttpClient client = new HttpClient();
         private static Jeopardy.Clue game;
 
